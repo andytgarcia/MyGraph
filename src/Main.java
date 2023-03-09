@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
         MyGraph g = new MyGraph();
@@ -22,7 +24,7 @@ public class Main {
 
 
         g.insertEdge("A", "B", "1");
-        g.insertEdge("C", "C", "2");
+        g.insertEdge("C", "D", "2");
         g.insertEdge("A", "F", "3");
         g.insertEdge("B", "G", "4");
         g.insertEdge("D", "G", "5");
@@ -49,6 +51,16 @@ public class Main {
 
 
         g.print();
+
+        System.out.println("Num Veritices: " + g.getNumVertices());
+        System.out.println("Num Edges: " + g.getNumEdges());
+
+
+        System.out.println("Edge between A and B: " + g.getEdge("A", "B"));
+        System.out.println("Edge between K and L: " + g.getEdge("K", "L"));
+
+        System.out.println("Vertices for edge 1: " + Arrays.toString(g.endVertices("1")));
+        System.out.println("Vertices for edge 15: " + Arrays.toString(g.endVertices("15")));
 
 
     }
