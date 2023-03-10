@@ -133,8 +133,9 @@ public class MyGraph {
 
         ArrayList<GraphPairing> gps = graph.get(vertex);
         for (GraphPairing g: gps) {
-            if (g.getEdge() == edge) {
-
+            assert edge != null;
+            if (g.getEdge().getName().equals(e) && g.getVertex() != vertex) {
+                return g.getVertex().getName();
             }
         }
 

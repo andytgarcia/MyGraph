@@ -52,7 +52,7 @@ public class Main {
 
         g.print();
 
-        System.out.println("Num Veritices: " + g.getNumVertices());
+        System.out.println("Num Vertices: " + g.getNumVertices());
         System.out.println("Num Edges: " + g.getNumEdges());
 
 
@@ -61,6 +61,9 @@ public class Main {
 
         System.out.println("Vertices for edge 1: " + Arrays.toString(g.endVertices("1")));
         System.out.println("Vertices for edge 15: " + Arrays.toString(g.endVertices("15")));
+
+        System.out.println("Opposite vertex from A and edge 1: " + g.opposite("A", "1"));
+
 
 
     }
