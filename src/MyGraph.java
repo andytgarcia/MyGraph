@@ -1,8 +1,5 @@
 import java.beans.VetoableChangeListener;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class MyGraph {
     private int numVertices;
@@ -64,14 +61,14 @@ public class MyGraph {
         if (v1EdgeList == null) {
             graph.put(vertex1, new ArrayList<>());
         }
-        graph.get(vertex1).add(new GraphPairing(vertex1, edge));
+        graph.get(vertex1).add(new GraphPairing(vertex2, edge));
 
 
         ArrayList<GraphPairing> v2EdgeList = graph.get(vertex2);
         if (v2EdgeList == null) {
             graph.put(vertex2, new ArrayList<>());
         }
-        graph.get(vertex2).add(new GraphPairing(vertex2, edge));
+        graph.get(vertex2).add(new GraphPairing(vertex1, edge));
 
         numEdges++;
 
@@ -106,7 +103,7 @@ public class MyGraph {
                 return g.getEdge().getName();
             }
         }
-        return null;
+        return "Edge does not exist";
     }
 
     public String[] endVertices(String e) {
@@ -129,17 +126,61 @@ public class MyGraph {
         Vertex vertex = getVertexFromString(v);
         Edge edge = getEdgeFromString(e);
 
-        Set<Vertex> vertices = graph.keySet();
-
         ArrayList<GraphPairing> gps = graph.get(vertex);
         for (GraphPairing g: gps) {
-            assert edge != null;
-            if (g.getEdge().getName().equals(e) && g.getVertex() != vertex) {
+            if (g.getEdge() == edge) {
                 return g.getVertex().getName();
             }
         }
 
         return null;
+    }
+
+    public int outDegree(String v) {
+        Vertex v1 = getVertexFromString(v);
+        int ans = 0;
+
+        ArrayList<GraphPairing> gps = graph.get(v1);
+
+        for (GraphPairing g: gps) {
+            if (g.getEdge() != null) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+
+    public ArrayList<String> incomingEdges(String v) {
+        Vertex v1 = getVertexFromString(v);
+        ArrayList<String> edges = new ArrayList<>();
+
+        ArrayList<GraphPairing> gps = graph.get(v1);
+        for (GraphPairing g: gps) {
+            if (g.getEdge() != null) {
+                edges.add(g.getEdge().getName());
+            }
+        }
+        return edges;
+
+    }
+
+    public void removeVertex(String v) {
+        Vertex v1 = getVertexFromString(v);
+
+        Set<Vertex> vertices = graph.keySet();
+
+        ArrayList<GraphPairing> gps = graph.get(v1);
+        for (int i = gps.size() -1; i > 0; i--) {
+            if (gps.get(i).getEdge() != null) {
+                gps.remove(gps.get(i));
+            }
+        }
+        vertices.remove(v1);
+
+
+
+
+
     }
 
 

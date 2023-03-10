@@ -63,6 +63,18 @@ public class Main {
         System.out.println("Vertices for edge 15: " + Arrays.toString(g.endVertices("15")));
 
         System.out.println("Opposite vertex from A and edge 1: " + g.opposite("A", "1"));
+        System.out.println("Opposite Vertex of G and 11 is " + g.opposite("G", "11"));
+
+
+        System.out.println("All Edges connected to G: " + g.outDegree("G") );
+        System.out.println("All edges connected to L: " + g.outDegree("L"));
+
+        System.out.println("List of edges connected to G: " + g.incomingEdges("G"));
+        System.out.println("List of edges connected to N: " + g.incomingEdges("N"));
+
+        g.removeVertex("G");
+        g.print();
+
 
 
 
