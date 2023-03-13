@@ -169,14 +169,18 @@ public class MyGraph {
 
         Set<Vertex> vertices = graph.keySet();
 
-        ArrayList<GraphPairing> gps = graph.get(v1);
-        for (int i = gps.size() -1; i > 0; i--) {
-            if (gps.get(i).getEdge() != null) {
-                gps.remove(gps.get(i));
+        for (Vertex vertex: vertices) {
+            ArrayList<GraphPairing> gps = graph.get(vertex);
+            for (int i = gps.size()-1; i>0; i--) {
+                assert gps.get(i).getVertex() != null;
+                if (gps.get(i).getEdge() != null && gps.get(i).getVertex().equals(v1)) {
+                    gps.remove(gps.get(i));
+                    numEdges--;
+                }
             }
         }
         vertices.remove(v1);
-
+        numVertices--;
 
 
 
