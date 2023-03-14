@@ -176,6 +176,7 @@ public class MyGraph {
             for (int i = gps.size()-1; i>0; i--) {
                 Vertex currentVertex = gps.get(i).getVertex();
                 if (currentVertex.getName().equals(v1.getName())) {
+                    gps.get(i).setEdge(null);
                     gps.remove(gps.get(i));
                     numEdges--;
                 }
@@ -244,5 +245,45 @@ public class MyGraph {
 
         return verticies.contains(v1);
     }
+
+
+    public void depthFirstProcess(String v) {
+        Set<Vertex> vertices = graph.keySet();
+
+        ArrayList<Vertex> visited = new ArrayList<>();
+
+        Vertex startingVertex = getVertexFromString(v);
+
+
+
+
+
+
+    }
+
+
+    public void breadthFirstProcess() {
+
+    }
+
+
+    private String findLowestNumEdge(String v) {
+        Vertex vertex = getVertexFromString(v);
+
+        ArrayList<GraphPairing> gps = graph.get(vertex);
+
+        String[] ans = new String[gps.size()];
+        int index = 0;
+        for (GraphPairing g: gps) {
+            if (g.getEdge() != null) {
+                ans[index] += g.getEdge().getName();
+                index++;
+            }
+        }
+        Arrays.sort(ans);
+        return ans[0];
+
+    }
+
 
 }

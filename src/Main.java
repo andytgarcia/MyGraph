@@ -84,6 +84,8 @@ public class Main {
         g.removeEdge("2");
         g.print();
 
+        System.out.println(g.edges());
+
 
 
 
