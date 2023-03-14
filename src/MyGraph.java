@@ -168,12 +168,14 @@ public class MyGraph {
         Vertex v1 = getVertexFromString(v);
 
         Set<Vertex> vertices = graph.keySet();
+        //ArrayList<Vertex> list = new ArrayList<>(vertices);
+        //Collections.reverse(list);
 
         for (Vertex vertex: vertices) {
             ArrayList<GraphPairing> gps = graph.get(vertex);
             for (int i = gps.size()-1; i>0; i--) {
-                assert gps.get(i).getVertex() != null;
-                if (gps.get(i).getEdge() != null && gps.get(i).getVertex().equals(v1)) {
+                Vertex currentVertex = gps.get(i).getVertex();
+                if (currentVertex.getName().equals(v1.getName())) {
                     gps.remove(gps.get(i));
                     numEdges--;
                 }
@@ -182,6 +184,26 @@ public class MyGraph {
         vertices.remove(v1);
         numVertices--;
 
+
+
+
+    }
+
+
+    public void removeEdge(String e) {
+        Edge edge = getEdgeFromString(e);
+
+        Set<Vertex> vertices = graph.keySet();
+
+        for (Vertex vertex: vertices) {
+            ArrayList<GraphPairing> gps = graph.get(vertex);
+            for (int i = gps.size()-1; i > 0; i--) {
+                if (gps.get(i).getEdge() == edge) {
+                    gps.remove(i);
+                }
+            }
+        }
+        numEdges--;
 
 
 

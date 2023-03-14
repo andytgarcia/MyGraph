@@ -81,6 +81,9 @@ public class Main {
         
         System.out.println(g.doesExist("G"));
 
+        g.removeEdge("2");
+        g.print();
+
 
 
 
