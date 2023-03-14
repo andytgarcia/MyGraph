@@ -52,6 +52,8 @@ public class Main {
 
         g.print();
 
+
+
         System.out.println("Num Vertices: " + g.getNumVertices());
         System.out.println("Num Edges: " + g.getNumEdges());
 
@@ -72,8 +74,12 @@ public class Main {
         System.out.println("List of edges connected to G: " + g.incomingEdges("G"));
         System.out.println("List of edges connected to N: " + g.incomingEdges("N"));
 
+        System.out.println(g.doesExist("G"));
+
         g.removeVertex("G");
         g.print();
+        
+        System.out.println(g.doesExist("G"));
 
 
 

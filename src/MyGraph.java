@@ -215,4 +215,12 @@ public class MyGraph {
         return null;
     }
 
+    public boolean doesExist(String s) {
+        Vertex v1 = getVertexFromString(s);
+
+        Set<Vertex> verticies = graph.keySet();
+
+        return verticies.contains(v1);
+    }
+
 }
