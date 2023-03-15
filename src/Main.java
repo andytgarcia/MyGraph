@@ -84,7 +84,9 @@ public class Main {
         g.removeEdge("2");
         g.print();
 
-        System.out.println(g.edges());
+        System.out.println();
+
+        g.depthFirstProcess("A");
 
 
 

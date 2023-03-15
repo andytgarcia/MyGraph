@@ -6,6 +6,8 @@ public class MyGraph {
     private HashMap<Vertex, ArrayList<GraphPairing>> graph;
     private int numEdges;
 
+    private final ArrayList<Vertex> visited = new ArrayList<>();
+
     public MyGraph() {
         numEdges = 0;
         numVertices = 0;
@@ -250,14 +252,48 @@ public class MyGraph {
     public void depthFirstProcess(String v) {
         Set<Vertex> vertices = graph.keySet();
 
-        ArrayList<Vertex> visited = new ArrayList<>();
-
         Vertex startingVertex = getVertexFromString(v);
+        Vertex nextVertex;
+
+        ArrayList<GraphPairing> gps;
+        gps = graph.get(startingVertex);
+
+        Edge currentEdge;
+        /*
+        if (gps.size() == 1 && gps.get(0).getEdge() != null) {
+            currentEdge = gps.get(0).getEdge();
+        }
+        else {
+            currentEdge = getEdgeFromString(findLowestNumEdge(v));
+        }
+
+         */
+        GraphPairing graphPairing = searchForVertexNotVisited(startingVertex.getName());
+        if (graphPairing != null) {
+            nextVertex = graphPairing.getVertex();
+            traverse(startingVertex.getName(), nextVertex.getName());
+        }
 
 
 
+        /*
+        Vertex temp = nextVertex;
+        gps = graph.get(temp);
+        if (gps.size() == 1) {
+            currentEdge = gps.get(0).getEdge();
+        }
+        else {
+            currentEdge = getEdgeFromString(findLowestNumEdge(v));
+        }
+
+        nextVertex = getVertexFromString(opposite(temp.getName(), currentEdge.getName()));
+        if (!visited.contains(nextVertex)) {
+            traverse(startingVertex.getName(), nextVertex.getName());
+        }
+        visited.add(nextVertex);
 
 
+         */
 
     }
 
@@ -282,6 +318,37 @@ public class MyGraph {
         }
         Arrays.sort(ans);
         return ans[0];
+
+    }
+
+    private void traverse(String v1, String v2) {
+        Vertex vertex1 = getVertexFromString(v1);
+        Vertex vertex2 = getVertexFromString(v2);
+        Edge edge = getEdgeFromString(getEdge(v1, v2));
+
+
+        System.out.println(vertex1.getName() + " -> " + edge.getName() + " -> " + vertex2.getName());
+
+    }
+
+    private GraphPairing searchForVertexNotVisited(String v) {
+        Vertex vertex = getVertexFromString(v);
+
+        ArrayList<GraphPairing> gps = graph.get(vertex);
+
+
+        for (GraphPairing g: gps) {
+            Vertex nextVertex = g.getVertex();
+            if (!visited.contains(nextVertex)) {
+                return g;
+            }
+
+        }
+
+        return null;
+
+
+
 
     }
 
