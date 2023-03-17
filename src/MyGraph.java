@@ -250,10 +250,12 @@ public class MyGraph {
 
 
     public void depthFirstProcess(String v) {
+        Stack<Vertex> paths = new Stack<>();
         Set<Vertex> vertices = graph.keySet();
 
         Vertex startingVertex = getVertexFromString(v);
-        Vertex nextVertex;
+        Vertex nextVertex = null;
+        Vertex tempVertex;
 
         ArrayList<GraphPairing> gps;
         gps = graph.get(startingVertex);
@@ -268,10 +270,25 @@ public class MyGraph {
         }
 
          */
+        visited.add(startingVertex);
+        paths.push(startingVertex);
+
+
         GraphPairing graphPairing = searchForVertexNotVisited(startingVertex.getName());
         if (graphPairing != null) {
             nextVertex = graphPairing.getVertex();
             traverse(startingVertex.getName(), nextVertex.getName());
+            visited.add(nextVertex);
+            paths.push(nextVertex);
+        }
+
+        tempVertex = nextVertex;
+        graphPairing = searchForVertexNotVisited(tempVertex.getName());
+        if (graphPairing != null) {
+            nextVertex = graphPairing.getVertex();
+            traverse(tempVertex.getName(), nextVertex.getName());
+            visited.add(nextVertex);
+            paths.push(nextVertex);
         }
 
 
