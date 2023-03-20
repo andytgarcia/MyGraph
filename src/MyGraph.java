@@ -282,6 +282,7 @@ public class MyGraph {
             paths.push(nextVertex);
         }
 
+    while(paths.size() != numVertices) {
         tempVertex = nextVertex;
         graphPairing = searchForVertexNotVisited(tempVertex.getName());
         if (graphPairing != null) {
@@ -290,7 +291,13 @@ public class MyGraph {
             visited.add(nextVertex);
             paths.push(nextVertex);
         }
-
+        else{
+            paths.pop();
+            nextVertex = paths.peek();
+            traverse(tempVertex.getName(), nextVertex.getName());
+            
+        }
+    }
 
 
         /*
