@@ -252,6 +252,7 @@ public class MyGraph {
     public void depthFirstProcess(String v) {
         Stack<Vertex> paths = new Stack<>();
         Set<Vertex> vertices = graph.keySet();
+        visited.clear();
 
         Vertex startingVertex = getVertexFromString(v);
         Vertex nextVertex = null;
@@ -261,15 +262,7 @@ public class MyGraph {
         gps = graph.get(startingVertex);
 
         Edge currentEdge;
-        /*
-        if (gps.size() == 1 && gps.get(0).getEdge() != null) {
-            currentEdge = gps.get(0).getEdge();
-        }
-        else {
-            currentEdge = getEdgeFromString(findLowestNumEdge(v));
-        }
 
-         */
         visited.add(startingVertex);
         paths.push(startingVertex);
 
@@ -297,32 +290,31 @@ public class MyGraph {
             traverse(tempVertex.getName(), nextVertex.getName());
             
         }
+        if (paths.size() == 1) {
+            System.out.println("End");
+            break;
+        }
     }
 
-
-        /*
-        Vertex temp = nextVertex;
-        gps = graph.get(temp);
-        if (gps.size() == 1) {
-            currentEdge = gps.get(0).getEdge();
-        }
-        else {
-            currentEdge = getEdgeFromString(findLowestNumEdge(v));
-        }
-
-        nextVertex = getVertexFromString(opposite(temp.getName(), currentEdge.getName()));
-        if (!visited.contains(nextVertex)) {
-            traverse(startingVertex.getName(), nextVertex.getName());
-        }
-        visited.add(nextVertex);
-
-
-         */
 
     }
 
 
-    public void breadthFirstProcess() {
+    public void breadthFirstProcess(String v) {
+        Vertex startingVertex = getVertexFromString(v);
+        Queue<Vertex> paths = new LinkedList<>();
+        visited.clear();
+
+        paths.add(startingVertex);
+        visited.add(startingVertex);
+
+        ArrayList<Edge> edges = null;
+
+
+
+
+
+
 
     }
 
