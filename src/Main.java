@@ -91,6 +91,10 @@ public class Main {
 
         g.depthFirstProcess("A");
 
+        System.out.println();
+
+        g.breadthFirstProcess("A");
+
 
 
 

@@ -1,4 +1,5 @@
 import java.beans.VetoableChangeListener;
+import java.time.temporal.ValueRange;
 import java.util.*;
 
 public class MyGraph {
@@ -251,17 +252,12 @@ public class MyGraph {
 
     public void depthFirstProcess(String v) {
         Stack<Vertex> paths = new Stack<>();
-        Set<Vertex> vertices = graph.keySet();
         visited.clear();
 
         Vertex startingVertex = getVertexFromString(v);
         Vertex nextVertex = null;
         Vertex tempVertex;
 
-        ArrayList<GraphPairing> gps;
-        gps = graph.get(startingVertex);
-
-        Edge currentEdge;
 
         visited.add(startingVertex);
         paths.push(startingVertex);
@@ -295,8 +291,6 @@ public class MyGraph {
             break;
         }
     }
-
-
     }
 
 
@@ -308,15 +302,26 @@ public class MyGraph {
         paths.add(startingVertex);
         visited.add(startingVertex);
 
-        ArrayList<Edge> edges = null;
 
+        while (visited.size() != numVertices) {
+            Vertex first = paths.poll();
 
+            ArrayList<String> edges = incomingEdges(first.getName());
+            for (String e : edges) {
+                Vertex nextVertex = getVertexFromString(opposite(first.getName(), e));
+                if (nextVertex != null && !visited.contains(nextVertex)) {
+                    visited.add(nextVertex);
+                    paths.add(nextVertex);
+                    traverse(first.getName(), nextVertex.getName());
+                }
 
-
-
-
-
+            }
+        }
+        System.out.println("End");
     }
+
+
+
 
 
     private String findLowestNumEdge(String v) {
